@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Silksong release likelyness</title>
+  </head>
+  <body style="text-align: center">
+    <style>
+      body {
+        background-image: url("https://pliki.ppe.pl/storage/7930de41a6fde03da54f/7930de41a6fde03da54f.jpg");
+      }
+      .center {
+        padding: 10px;
+        font-weight: bold;
+        font-family: Verdana;
+        font-size: 40;
+        color: aliceblue;
+        background-color: slategray;
+        padding: 30px;
+        line-height: 80px;
+      }
+    </style>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <bold id="counter" class="center">Text</bold>
+    <script>
+      const date1 = new Date();
+      const date2 = new Date("06/12/2023");
+      const diffT = date2.getTime() - date1.getTime();
+      const days = diffT / (1000 * 3600 * 24);
+      const chance = (1 / days) * 100;
+      let counter = document.getElementById("counter");
+      counter.innerHTML = `It is ${chance}% likely that silksong will release right now.`;
+    </script>
+  </body>
+</html>
