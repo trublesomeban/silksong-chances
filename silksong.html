@@ -40,7 +40,7 @@
       const days = diffT / (1000 * 3600 * 24);
       const chance = (1 / days) * 100;
       let counter = document.getElementById("counter");
-      counter.innerHTML = `It is ${chance}% likely that silksong will release right now.`;
+      counter.innerHTML = `It is ${chance.toFixed(5)}% likely that silksong will release right now.`;
     </script>
   </body>
 </html>
