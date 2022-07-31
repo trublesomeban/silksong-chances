@@ -164,7 +164,7 @@
       }
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
-      if (window.chanceType == "this month" || window.chanceType == "this year")
+      if (window.chanceType == "this year")
         text = "I'm working on how to determine the likelyness of Silksong releasing "
       counter.innerHTML = `${text}<div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
         <button class="dropbtn" >${window.chanceType}</button>
