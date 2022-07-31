@@ -154,17 +154,23 @@
           break
         case "this month":
           const month = date1.getMonth();
-          const days = month == 2 ? 28 : (!(month % 2) ? 30 : 31)
+          const days = month == 2 ? 28 : (!(month % 2) && month != 8 ? 30 : 31)
           unit = Math.ceil(diffT / (1000 * 3600 * 24 * days - date1.getDate()))
           chance = (1 / unit) * 100;
-          precision = 5;
+          precision = 3;
           break
         case "this year":
+          const year = date1.getFullYear();
+          if (year == 2022) {
+            unit = Math.ceil((new Date("12/31/2022").getTime() - date1.getTime()) / (1000 * 3600 * 24))
+            chance = (1 / unit) * 100;
+            precision = 2;
+          }
           break
       }
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
-      if (window.chanceType == "this year")
+      if (window.chanceType == "")
         text = "I'm working on how to determine the likelyness of Silksong releasing "
       counter.innerHTML = `${text}<div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
         <button class="dropbtn" >${window.chanceType}</button>
