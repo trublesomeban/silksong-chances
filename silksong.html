@@ -1,52 +1,185 @@
 <html>
-  <head>
-    <title>Silksong release likelyness</title>
-  </head>
-  <body style="text-align: center">
-    <style>
-      body {
-        background-image: url("https://pliki.ppe.pl/storage/7930de41a6fde03da54f/7930de41a6fde03da54f.jpg");
-      }
-      .center {
-        padding: 10px;
-        font-weight: bold;
-        font-family: Verdana;
-        font-size: 40;
-        color: aliceblue;
-        background-color: slategray;
-        padding: 30px;
-        line-height: 80px;
-      }
-    </style>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <bold id="counter" class="center">lorem ipsum</bold>
-    <script>
+
+<head>
+  <title>Silksong release likelyness</title>
+</head>
+
+<body style="text-align: center">
+  <style>
+    label {
+      padding: 4;
+      color: hsl(259, 44%, 8%);
+      border-width: 4;
+      border-style: none;
+      border-radius: 10px;
+      font-size: 28;
+      font-weight: bolder;
+      font-family: Verdana;
+      background-color: whitesmoke;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .dropbtn {
+      font-size: 25;
+    }
+
+    .btn {
+      font-size: 30;
+    }
+
+    button {
+      padding: 8;
+      background-color: hsl(212, 8%, 54%);
+      color: hsl(0, 0%, 100%);
+      border-color: hsl(0, 0%, 100%);
+      border-width: 4;
+      border-style: solid;
+      border-radius: 10px;
+      font-weight: bolder;
+      font-family: Verdana;
+    }
+
+    button:hover {
+      padding: 8;
+      border-color: hsl(348, 80%, 33%);
+      background-color: hsl(348, 83%, 47%);
+      color: hsl(259, 44%, 8%);
+      border-width: 4;
+      border-style: solid;
+      border-radius: 10px;
+      font-weight: bolder;
+      font-family: Verdana;
+    }
+
+    body {
+      background-size: 140%;
+      background-position-x: 50%;
+      background-position-y: 100%;
+      background-color: hsl(259, 44%, 8%);
+    }
+
+    .center {
+      white-space: nowrap;
+      display: inline-block;
+      border-width: 4;
+      border-style: solid;
+      border-radius: 10px;
+      padding: 4px;
+      font-weight: bold;
+      font-family: Verdana;
+      font-size: 25px;
+      color: aliceblue;
+      background-color: slategray;
+      padding: 30px;
+      line-height: 80px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: slategray;
+      border-width: 0;
+      border-style: none;
+      border-radius: 4px;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+  <br>
+  <bold id="counter" class="center">Text</bold>
+  <br>
+  <br>
+  <button class="btn" id="refresh" onclick="refresh()">Recalculate</button>
+  <script>
+
+    window.chanceType = "today";
+    const right_now = () => {
+      window.chanceType = "right now";
+      refresh();
+    }
+    const today = () => {
+      window.chanceType = "today";
+      refresh();
+    }
+    const this_month = () => {
+      window.chanceType = "this month";
+      refresh();
+    }
+    const this_year = () => {
+      window.chanceType = "this year";
+      refresh();
+    }
+    const num = Math.floor(Math.random() * 6) + 1;
+    document.body.background = `images/${num}.jpg`;
+    const refresh = () => {
+      document.getElementById("refresh").innerText = "Recalculating..."
+      setTimeout(() => document.getElementById("refresh").innerText = "Recalculate", 250)
+      const date1 = new Date();
       const date2 = new Date("06/12/2023");
       const a = 1000 * 3600 * 24
-      let counter = document.getElementById("counter");
       let lastChance = 0;
-      while (true) {
-      const date1 = new Date();
       const diffT = date2.getTime() - date1.getTime();
-      const days = diffT / a
-      const chance = (1 / days) * 100;
-      if (chance.toFixed(5) != lastChance)
-        counter.innerHTML = `It is ${chance.toFixed(5)}% likely that silksong will release today.`;
-      lastChance = chance.toFixed(5);
+      let chance = 0;
+      let precision = 5;
+      let unit = 0;
+      switch (window.chanceType) {
+        case "right now":
+          unit = diffT / 1000;
+          chance = (1 / unit) * 100;
+          precision = 14;
+          break
+        case "today":
+          unit = Math.ceil(diffT / (1000 * 3600 * 24))
+          chance = (1 / unit) * 100;
+          precision = 5;
+          break
+        case "this month":
+          break
+        case "this year":
+          break
       }
-    </script>
-  </body>
+      let counter = document.getElementById("counter");
+      let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
+      if (window.chanceType == "this month" || window.chanceType == "this year")
+        text = "I'm working on how to determine the likelyness of Silksong releasing "
+      counter.innerHTML = `${text}<div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
+        <button class="dropbtn" >${window.chanceType}</button>
+        <div class="dropdown-content">
+          <button class="dropbtn" onclick="right_now()">right now</button><br>
+          <button class="dropbtn" onclick="today()">today</button><br>
+          <button class="dropbtn" onclick="this_month()">this month</button><br>
+          <button class="dropbtn" onclick="this_year()">this year</button><br>
+        </div>
+      </div>.`;
+      return false
+    }
+    refresh();
+    const hover = () => {
+      document.getElementsByClassName("dropbtn").item(0).innerText = "select period"
+    }
+    const unhover = () => {
+      document.getElementsByClassName("dropbtn").item(0).innerText = `${window.chanceType}`
+    }
+  </script>
+</body>
+
 </html>
