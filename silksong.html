@@ -70,33 +70,33 @@
     .center {
       white-space: nowrap;
       display: inline-block;
-      border-width: 4;
-      border-style: solid;
+      border-color: goldenrod;
+      border-width: 4px;
+      border-style: none;
       border-radius: 10px;
-      padding: 4px;
       font-weight: bold;
       font-family: Verdana;
       font-size: 25px;
       color: aliceblue;
-      background-color: slategray;
-      padding: 30px;
-      line-height: 80px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+      padding: 8px;
+      line-height: 50px;
     }
 
     .dropdown {
       position: relative;
       display: inline-block;
+      line-height: 120px;
     }
 
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: slategray;
       border-width: 0;
       border-style: none;
       border-radius: 4px;
       min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
       z-index: 1;
     }
 
@@ -150,19 +150,19 @@
         case "today":
           unit = Math.ceil(diffT / (1000 * 3600 * 24))
           chance = (1 / unit) * 100;
-          precision = 5;
+          precision = 3;
           break
         case "this month":
           const month = date1.getMonth();
           const days = month == 2 ? 28 : (!(month % 2) && month != 8 ? 30 : 31)
-          unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date(`${month}/${days}/${date1.getFullYear()}`).getTime() - date1.getTime()) / (1000 * 3600 * 24))))
+          unit = Math.ceil(diffT / (1000 * 3600 * 24 * (new Date(`${month + 1}/${days}/${date1.getFullYear()}`).getTime() - date1.getTime()) / (1000 * 3600 * 24)))
           chance = (1 / unit) * 100;
-          precision = 3;
+          precision = 2;
           break
         case "this year":
           const year = date1.getFullYear();
           if (year == 2022) {
-            unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date("12/31/2022").getTime() - date1.getTime()) / (1000 * 3600 * 24))));
+            unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date("12/31/2022").getTime() - date1.getTime()) / (1000 * 3600 * 48))));
             chance = (1 / unit) * 100;
             precision = 2;
           } else {
@@ -174,10 +174,10 @@
         precision = 0;
         chance = 100
       }
-      if (chance <= 0) {
-        precision = 0;
-        chance = 0
-      }
+      // if (chance <= 0) {
+      //   precision = 0;
+      //   chance = 0
+      // }
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
       if (window.chanceType == "")
