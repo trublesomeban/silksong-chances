@@ -165,8 +165,14 @@
             unit = Math.ceil((new Date("12/31/2022").getTime() - date1.getTime()) / (1000 * 3600 * 24))
             chance = (1 / unit) * 100;
             precision = 2;
+          } else {
+            chance = 100
           }
           break
+      }
+      if (chance >= 100) {
+        precision = 0;
+        chance = 100
       }
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
