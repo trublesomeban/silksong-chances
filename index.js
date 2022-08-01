@@ -33,6 +33,18 @@ const today = () => {
   window.globalDate = new Date();
   refresh();
 };
+const tomorrow = () => {
+  window.chanceType = "tomorrow";
+  window.dateType = null;
+  window.globalDate = new Date();
+  refresh();
+};
+const thisWeek = () => {
+  window.chanceType = "this week";
+  window.dateType = null;
+  window.globalDate = new Date();
+  refresh();
+};
 const thisMonth = () => {
   window.chanceType = "this month";
   window.dateType = null;
@@ -106,10 +118,9 @@ const refresh = (recompile = true) => {
     250
   );
   const date1 = window.globalDate;
-  // const date1 = new Date("06/12/2023");
+  // let date1 = new Date("06/12/2023");
   const date2 = new Date("06/13/2023");
-  let lastChance = 0;
-  const diffT = date2.getTime() - date1.getTime();
+  let diffT = date2.getTime() - date1.getTime();
   let chance = 0;
   let precision = 5;
   let unit = 0;
@@ -127,6 +138,18 @@ const refresh = (recompile = true) => {
       unit = Math.ceil(diffT / day);
       chance = (1 / unit) * 100;
       precision = 3;
+      break;
+    case "tomorrow":
+      date1.setDate(date1.getDate() + 1);
+      diffT = date2.getTime() - date1.getTime();
+      unit = Math.ceil(diffT / day);
+      chance = (1 / unit) * 100;
+      precision = 3;
+      break;
+    case "this week":
+      unit = Math.ceil(diffT / 7 - date1.getDay());
+      chance = (1 / unit) * 100;
+      precision = 2;
       break;
     case "this month":
       unit = Math.ceil(
@@ -180,6 +203,8 @@ const refresh = (recompile = true) => {
         <div class="dropdown-content">
           <button class="dropbtn" onclick="right_now()">right now</button><br>
           <button class="dropbtn" onclick="today()">today</button><br>
+	  <button class="dropbtn" onclick="tomorrow()">tomorrow</button><br>
+	  <button class="dropbtn" onclick="thisWeek()">this week</button><br>
           <button class="dropbtn" onclick="thisMonth()">this month</button><br>
           <button class="dropbtn" onclick="thisYear()">this year</button><br>
           <button class="dropbtn" onclick="onDate()" style="height:10%">
