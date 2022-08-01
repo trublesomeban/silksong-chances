@@ -76,7 +76,7 @@ body {
 	line-height: 50px;
 }
 
-footer {
+.foot {
 	white-space: nowrap;
 	display: inline-block;
 	border-color: goldenrod;
