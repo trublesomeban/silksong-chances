@@ -120,6 +120,7 @@ const refresh = (recompile = true) => {
   const date1 = window.globalDate;
   // let date1 = new Date("06/12/2023");
   const date2 = new Date("06/13/2023");
+  const date3 = new Date();
   let diffT = date2.getTime() - date1.getTime();
   let chance = 0;
   let precision = 5;
@@ -140,14 +141,13 @@ const refresh = (recompile = true) => {
       precision = 3;
       break;
     case "tomorrow":
-      date1.setDate(date1.getDate() + 1);
-      diffT = date2.getTime() - date1.getTime();
+      date3.setDate(date1.getDate() + 1);
+      diffT = date2.getTime() - date3.getTime();
       unit = Math.ceil(diffT / day);
       chance = (1 / unit) * 100;
       precision = 3;
       break;
     case "this week":
-      const date3 = new Date();
       date3.setDate(date1.getDate() + (7 - date1.getDay()));
       unit = Math.ceil(diffT / (date3.getTime() - date1.getTime()));
       chance = (1 / unit) * 100;
