@@ -86,9 +86,9 @@ body {
 	font-weight: bold;
 	font-family: Verdana;
 	font-size: 16px;
-	background-color: rgba(39, 38, 43, 0.45);
+	background-color: rgba(39, 38, 43, 0.8);
 	color: aliceblue;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.87);
 	padding: 8px;
 	line-height: 20px;
 	width: 30%;
@@ -98,7 +98,7 @@ body {
 }
 
 a {
-	color: hsl(330, 46%, 26%);
+	color: hsl(330, 61%, 36%);
 	text-decoration: none;
 }
 
