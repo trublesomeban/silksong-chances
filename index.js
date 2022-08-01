@@ -147,7 +147,9 @@ const refresh = (recompile = true) => {
       precision = 3;
       break;
     case "this week":
-      unit = Math.ceil(diffT / 7 - date1.getDay());
+      const date3 = new Date();
+      date3.setDate(date1.getDate() + (7 - date1.getDay()));
+      unit = Math.ceil(diffT / (date3.getTime() - date1.getTime()));
       chance = (1 / unit) * 100;
       precision = 2;
       break;
