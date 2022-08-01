@@ -126,6 +126,11 @@ body {
   left: 34%;
 }
 
+.link {
+  color: hsl(330, 61%, 48%);
+  text-decoration: none;
+}
+
 a {
   color: hsl(330, 61%, 48%);
   text-decoration: none;
