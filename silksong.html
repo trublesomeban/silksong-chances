@@ -1,34 +1,71 @@
 <html>
 
 <head>
-  <title>Silksong release likelyness</title>
+  <title>Chances of Silksong releasing</title>
 </head>
 
 <body style="text-align: center">
   <link rel="stylesheet" href="styles.css">
   <br>
-  <bold id="counter" class="center">Text</bold>
+  <bold id="counter" class="center">Text<div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
+      <button class="dropbtn">${window.chanceType}</button>
+      <div class="dropdown-content">
+        <button class="dropbtn" onclick="right_now()">right now</button><br>
+        <button class="dropbtn" onclick="today()">today</button><br>
+        <button class="dropbtn" onclick="thisMonth()">this month</button><br>
+        <button class="dropbtn" onclick="thisYear()">this year</button><br>
+        <form class="dropbtn" id="dateForm">
+          <button class="dropbtn" onclick="">
+            on
+            <input id="date.month" class="month" type="number" value="">
+            /<input id="date.day" class="day" type="number" value="">
+            /<input id="date.year" class="year" type="number" value="">
+          </button>
+        </form>
+      </div>
+    </div>.</bold>
   <br>
   <br>
   <button class="btn" id="refresh" onclick="refresh()">Recalculate</button>
+
   <script>
+    document.canSubmit = false
+    window.date1 = new Date()
     window.chanceType = "today";
     const right_now = () => {
       window.chanceType = "right now";
+      window.dateType = null
+      window.date1 = new Date()
       refresh();
     };
     const today = () => {
       window.chanceType = "today";
+      window.dateType = null
+      window.date1 = new Date()
       refresh();
     };
-    const this_month = () => {
+    const thisMonth = () => {
       window.chanceType = "this month";
+      window.dateType = null
+      window.date1 = new Date()
       refresh();
     };
-    const this_year = () => {
+    const thisYear = () => {
       window.chanceType = "this year";
+      window.dateType = null
+      window.date1 = new Date()
       refresh();
     };
+    const onDate = () => {
+      if (!window.canSubmit) return false
+      window.chanceType = "today"
+      window.dateType = "custom"
+      const month = document.getElementById("date.month").value
+      const day = document.getElementById("date.day").value
+      const year = document.getElementById("date.year").value
+      window.date1 = new Date(`${month}/${day}/${year}`)
+      refresh()
+    }
     const num = Math.floor(Math.random() * 9) + 1;
     document.body.background = `images/${num}.jpg`;
     const refresh = () => {
@@ -37,7 +74,7 @@
         () => (document.getElementById("refresh").innerText = "Recalculate"),
         250
       );
-      const date1 = new Date();
+      const date1 = window.date1
       const date2 = new Date("06/12/2023");
       let lastChance = 0;
       const diffT = date2.getTime() - date1.getTime();
@@ -45,6 +82,9 @@
       let precision = 5;
       let unit = 0;
       const day = 1000 * 3600 * 24;
+      const month = date1.getMonth();
+      const days = month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
+      const year = date1.getFullYear();
       switch (window.chanceType) {
         case "right now":
           unit = diffT / 1000;
@@ -57,14 +97,11 @@
           precision = 3;
           break;
         case "this month":
-          const month = date1.getMonth();
-          const days = month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
           unit = Math.ceil(diffT / (new Date(`${month + 1}/${days}/${date1.getFullYear()}`).getTime() - date1.getTime()));
           chance = (1 / unit) * 100;
           precision = 2;
           break;
         case "this year":
-          const year = date1.getFullYear();
           if (year == 2022) {
             unit = Math.ceil(diffT / (new Date("01/1/2023").getTime() - date1.getTime()));
             chance = (1 / unit) * 100;
@@ -82,20 +119,33 @@
         precision = 0;
         chance = 0;
       }
+      const maxMonth = year == 2022 ? 12 : 6
+      const minDay = month == 6 ? 12 : 1
+      const period = window.dateType == "custom" ? `on ${month + 1}/${date1.getDate()}/${year}` : window.chanceType
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `;
       if (window.chanceType == "")
-        text =
-          "I'm working on how to determine the likelyness of Silksong releasing ";
+        text = "I'm working on how to determine the likelyness of Silksong releasing ";
       counter.innerHTML = `${text}<div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
-        <button class="dropbtn" >${window.chanceType}</button>
+        <button class="dropbtn" >${period}</button>
         <div class="dropdown-content">
           <button class="dropbtn" onclick="right_now()">right now</button><br>
           <button class="dropbtn" onclick="today()">today</button><br>
-          <button class="dropbtn" onclick="this_month()">this month</button><br>
-          <button class="dropbtn" onclick="this_year()">this year</button><br>
+          <button class="dropbtn" onclick="thisMonth()">this month</button><br>
+          <button class="dropbtn" onclick="thisYear()">this year</button><br>
+          <button class="dropbtn" onclick="onDate()">
+          <form class="dropbtn" id="dateForm">
+              on 
+              <input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="refreshDate()" id="date.month" class="month" type="number" value="${month + 1}" min="6" max="${maxMonth}">
+              /<input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="refreshDate()" id="date.day" class="day" type="number" value="${date1.getDate()}" min="${minDay}" max="${days}">
+              /<input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="refreshDate()" id="date.year" class="year" type="number" value="${year}" min="2022" max="2023">
+          </form>
+        </button>
         </div>
       </div>.`;
+      let form = document.getElementById("dateForm");
+      const handleForm = (event) => { event.preventDefault(); }
+      form.addEventListener('submit', handleForm);
       return false;
     };
     refresh();
@@ -104,11 +154,19 @@
         "select period";
     };
     const unhover = () => {
+      const month = window.date1.getMonth();
+      const year = window.date1.getFullYear();
+      const period = window.dateType == "custom" ? `on ${month + 1}/${window.date1.getDate()}/${year}` : window.chanceType
       document
         .getElementsByClassName("dropbtn")
-        .item(0).innerText = `${window.chanceType}`;
+        .item(0).innerText = `${period}`;
     };
-
+    const preventClick = () => {
+      window.canSubmit = false
+    }
+    const allowClick = () => {
+      window.canSubmit = true
+    }
   </script>
   <footer class="foot">Made by <a href="https://twitter.com/PharloomMathGuy">@PharloomMathGuy</a> on Twitter </footer>
 </body>
