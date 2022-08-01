@@ -65,11 +65,11 @@ const upDate = () => {
   let day = date[1].value;
   let year = date[2].value;
   const maxMonth = year == 2022 ? 12 : 6;
-  const minDay = month == 6 ? 12 : 1;
+  const minDay = year == 2022 && month == 6 ? 12 : 1;
   date[0].min = 1;
   date[0].max = maxMonth;
   date[1].min = minDay;
-  date[1].max = daysInMonth(month);
+  date[1].max = year == 2023 && month == 6 ? 12 : daysInMonth(month);
   date[2].min = 2022;
   date[2].max = 2023;
   for (item of date) {
@@ -94,7 +94,7 @@ const upDate = () => {
     refresh(false);
   }
 };
-const num = Math.floor(Math.random() * 9) + 1;
+const num = Math.floor(Math.random() * 11) + 1;
 document.body.background = `images/${num}.jpg`;
 const daysInMonth = (month) => {
   return month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
@@ -194,6 +194,8 @@ const refresh = (recompile = true) => {
         </button>
         </div>
       </div>.`;
+    const num = Math.floor(Math.random() * 11) + 1;
+    document.body.background = `images/${num}.jpg`;
   }
   let form = document.getElementById("dateForm");
   const handleForm = (event) => {
