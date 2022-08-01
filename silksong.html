@@ -164,7 +164,7 @@
           if (year == 2022) {
             unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date("01/1/2023").getTime() - date1.getTime()) / (1000 * 3600 * 24))));
             chance = (1 / unit) * 100;
-            precision = 28;
+            precision = 2;
           } else {
             chance = 100
           }
