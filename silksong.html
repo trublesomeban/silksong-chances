@@ -76,10 +76,10 @@
         precision = 0;
         chance = 100
       }
-      // if (chance <= 0) {
-      //   precision = 0;
-      //   chance = 0
-      // }
+      if (chance <= 0) {
+        precision = 0;
+        chance = 0
+      }
       let counter = document.getElementById("counter");
       let text = `It is ${chance.toFixed(precision)}% likely that Silksong will release `
       if (window.chanceType == "")
@@ -103,6 +103,10 @@
       document.getElementsByClassName("dropbtn").item(0).innerText = `${window.chanceType}`
     }
   </script>
+  <footer>Made by
+    <a href="https://twitter.com/PharloomMathGuy">@PharloomMathGuy</a>
+    on Twitter
+  </footer>
 </body>
 
 </html>
