@@ -162,7 +162,7 @@
         case "this year":
           const year = date1.getFullYear();
           if (year == 2022) {
-            unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date("01/1/2023").getTime() - date1.getTime()) / (1000 * 3600 * 48))));
+            unit = Math.ceil(diffT / (1000 * 3600 * 24 * Math.ceil((new Date("01/1/2022").getTime() - date1.getTime()) / (1000 * 3600 * 48))));
             chance = (1 / unit) * 100;
             precision = 28;
           } else {
