@@ -134,7 +134,7 @@
           <button class="dropbtn" onclick="today()">today</button><br>
           <button class="dropbtn" onclick="thisMonth()">this month</button><br>
           <button class="dropbtn" onclick="thisYear()">this year</button><br>
-          <button class="dropbtn" onclick="onDate()">
+          <button class="dropbtn" onclick="onDate()" style="height:10%">
           <form class="dropbtn" id="dateForm">
               on 
               <input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="refreshDate()" id="date.month" class="month" type="number" value="${month + 1}" min="6" max="${maxMonth}">
