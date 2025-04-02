@@ -19,11 +19,11 @@
           <form class="dropbtn" id="dateForm">
             on
             <input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="upDate()" id="date.month"
-              class="month" type="number" value="" min="6" max="">
+              class="month" type="number" value="" min="4" max="">
             /<input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="upDate()" id="date.day"
               class="day" type="number" value="" min="" max="">
             /<input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="upDate()" id="date.year"
-              class="year" type="number" value="" min="2022" max="2023">
+              class="year" type="number" value="" min="2025" max="2025">
           </form>
         </button>
       </div>
@@ -112,12 +112,12 @@
       let month = date[0].value;
       let day = date[1].value;
       let year = date[2].value;
-      const maxMonth = year == 2022 ? 12 : 6;
-      const minDay = year == 2022 && month == 6 ? 12 : 1;
+      const maxMonth = 12
+      const minDay = 1
       date[0].min = 1;
       date[0].max = maxMonth;
       date[1].min = minDay;
-      date[1].max = year == 2023 && month == 6 ? 12 : daysInMonth(month);
+      date[1].max = daysInMonth(month);
       date[2].min = 2022;
       date[2].max = 2023;
       for (item of date) {
@@ -138,8 +138,9 @@
         refresh(false);
       }
     };
-    const num = Math.floor(Math.random() * 11) + 1;
+    const num = Math.floor(Math.random() * 20) + 1;
     document.body.background = `images/${num}.jpg`;
+    
     const daysInMonth = (month) => {
       return month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
     };
@@ -151,7 +152,7 @@
       );
       const date1 = window.dateType == "custom" ? window.globalDate : new Date();
       // let date1 = new Date("06/12/2023");
-      const date2 = new Date("06/13/2023");
+      const date2 = new Date("12/30/2025");
       const date3 = new Date();
       let diffT = date2.getTime() - date1.getTime();
       let chance = 0;
@@ -197,7 +198,7 @@
         case "this year":
           if (year == 2022) {
             unit = Math.ceil(
-              diffT / (new Date("01/1/2023").getTime() - date1.getTime())
+              diffT / (new Date("01/1/2025").getTime() - date1.getTime())
             );
             chance = (1 / unit) * 100;
             precision = 2;
@@ -214,8 +215,8 @@
         precision = 0;
         chance = 0;
       }
-      const maxMonth = year == 2022 ? 12 : 6;
-      const minDay = month == 6 ? 12 : 1;
+      const maxMonth = 12
+      const minDay = 1
       const period =
         window.dateType == "custom"
           ? `on ${month + 1}/${date1.getDate()}/${year}`
@@ -252,7 +253,7 @@
         </button>
         </div>
       </div>.`;
-        const num = Math.floor(Math.random() * 17) + 1;
+        const num = Math.floor(Math.random() * 20) + 1;
         document.body.background = `images/${num}.png`;
       }
       let form = document.getElementById("dateForm");
