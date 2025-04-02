@@ -82,8 +82,8 @@ button:hover {
 }
 
 body {
-  background-size: 140%;
-  background-position-x: 50%;
+  background-size: 120%;
+  background-position-x: 60%;
   background-position-y: 100%;
   background-color: hsl(259, 44%, 8%);
 }
