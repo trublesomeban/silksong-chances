@@ -6,6 +6,7 @@
 
 <body style="text-align: center">
   <link rel="stylesheet" href="styles.css">
+  <img src="LOGO.png" class="logo">
   <br>
   <bold id="counter" class="center">
     <div onmouseover="hover()" onmouseleave="unhover()" class="dropdown">
@@ -140,7 +141,7 @@
     };
     const num = Math.floor(Math.random() * 20) + 1;
     document.body.background = `images/${num}.jpg`;
-    
+     
     const daysInMonth = (month) => {
       return month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
     };
