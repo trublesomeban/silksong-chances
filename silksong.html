@@ -16,7 +16,7 @@
         <button class="dropbtn" onclick="today()">today</button><br>
         <button class="dropbtn" onclick="thisMonth()">this month</button><br>
         <button class="dropbtn" onclick="thisYear()">this year</button><br>
-        <button class="dropbtn" onclick="onDate()" style="height:10%">
+        <!-- <button class="dropbtn" onclick="onDate()" style="height:10%">
           <form class="dropbtn" id="dateForm">
             on
             <input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="upDate()" id="date.month"
@@ -26,13 +26,13 @@
             /<input onmouseenter="preventClick()" onmouseleave="allowClick()" oninput="upDate()" id="date.year"
               class="year" type="number" value="" min="2025" max="2025">
           </form>
-        </button>
+        </button> -->
       </div>
     </div>.
   </bold>
   <br>
   <br>
-  <button class="btn" id="refresh" onclick="refresh(true)">Recalculate</button>
+  <button class="btn" id="refresh" onclick="refresh(true)"><img src="RECALC.png" class="recalc"></button>
 
   <script>
     window.allowSubmit = false;
@@ -146,14 +146,9 @@
       return month == 2 ? 28 : !(month % 2) && month != 8 ? 30 : 31;
     };
     const refresh = (recompile = true) => {
-      document.getElementById("refresh").innerText = "Recalculating...";
-      setTimeout(
-        () => (document.getElementById("refresh").innerText = "Recalculate"),
-        250
-      );
       const date1 = window.dateType == "custom" ? window.globalDate : new Date();
       // let date1 = new Date("06/12/2023");
-      const date2 = new Date("12/30/2025");
+      const date2 = new Date("9/18/2025");
       const date3 = new Date();
       let diffT = date2.getTime() - date1.getTime();
       let chance = 0;
@@ -243,15 +238,6 @@
 	  <button class="dropbtn" onclick="thisWeek()">this week</button><br>
           <button class="dropbtn" onclick="thisMonth()">this month</button><br>
           <button class="dropbtn" onclick="thisYear()">this year</button><br>
-          <button class="dropbtn" onclick="onDate()" style="height:10%">
-          <form class="dropbtn" id="dateForm">
-              on 
-              <input onmouseenter="preventClick()" onmouseleave="allowClick()" onchange="upDate()" id="date.month" class="month" type="number" value="${month + 1
-          }" min="6" max="${maxMonth}">
-              /<input onmouseenter="preventClick()" onmouseleave="allowClick()" onchange="upDate()" id="date.day" class="day" type="number" value="${date1.getDate()}" min="${minDay}" max="${days}">
-              /<input onmouseenter="preventClick()" onmouseleave="allowClick()" onchange="upDate()" id="date.year" class="year" type="number" value="${year}" min="2022" max="2023">
-          </form>
-        </button>
         </div>
       </div>.`;
         const num = Math.floor(Math.random() * 20) + 1;

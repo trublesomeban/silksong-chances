@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Trajan Pro Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Trajan Pro Regular"), url("TrajanPro-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Trajan Pro Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Trajan Pro Bold"), url("TrajanPro-Bold.woff") format("woff");
+}
+
 label {
   padding: 4;
   color: hsl(259, 44%, 8%);
@@ -21,12 +35,9 @@ input[type="number"] {
 }
 
 .dropbtn {
-  font-size: 25;
+  font-size: 20;
 }
 
-.btn {
-  font-size: 25;
-}
 
 input:focus,
 select:focus,
@@ -46,7 +57,7 @@ button:focus {
 
 input {
   padding: 8;
-  background-color: hsl(212, 8%, 54%);
+  background-color: rgba(39, 38, 43, 0.8);
   color: hsl(0, 0%, 100%);
   border-color: hsl(0, 0%, 100%);
   border-width: 4;
@@ -57,48 +68,58 @@ input {
   font-size: 20;
 }
 
-button {
-  padding: 8;
-  background-color: hsl(212, 8%, 54%);
-  color: hsl(0, 0%, 100%);
+.dropbtn {
+  padding:6;
+  margin-top: 4;
+  color: hsl(348, 100%, 63%);
+  background-color: transparent;
   border-color: hsl(0, 0%, 100%);
-  border-width: 4;
-  border-style: solid;
-  border-radius: 10px;
+  border-width: 0;
+  border-radius: 0.3rem;
   font-weight: bolder;
-  font-family: Verdana;
+}
+.dropbtn:hover {
+  background-color: rgb(255, 66, 104);
+  color:white;
 }
 
-button:hover {
-  padding: 8;
-  border-color: hsl(348, 80%, 33%);
-  background-color: hsl(348, 83%, 47%);
-  color: hsl(259, 44%, 8%);
-  border-width: 4;
-  border-style: solid;
-  border-radius: 10px;
-  font-weight: bolder;
-  font-family: Verdana;
+.btn {
+  margin-top: 0.5rem;
+  background-color: rgba(39, 38, 43, 0.5);
+  border-radius: 0.4rem;
+  border-color: transparent;
+  width: 20%;
+}
+.btn:hover {
+  border-color: transparent;
+  background-color: rgb(255, 66, 104);
+}
+
+.recalc {
+  padding: 0;
+  /* position: relative; */
+  width: 100%;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 body {
-  background-size: 120%;
-  background-position-x: 60%;
+  background-size: 130%;
+  background-position-x: 50%;
   background-position-y: 100%;
   background-color: hsl(259, 44%, 8%);
 }
 
 .logo {
+  margin-bottom:1rem;
   white-space: nowrap;
   display: inline-block;
   border-color: goldenrod;
   border-width: 4px;
   border-style: none;
-  border-radius: 10px;
   font-weight: bold;
   font-family: Verdana;
   font-size: 25px;
-  filter: drop-shadow(1px 1px 10px black);
+  filter: drop-shadow(2px 2px 1px black);
   color: aliceblue;
   padding: 8px;
   line-height: 50px;
@@ -170,6 +191,8 @@ a {
   background-color: rgba(39, 38, 43, 0.45);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
   z-index: 1;
+  padding-left: 0px;
+  margin-left: 0px;
 }
 
 .dropdown:hover .dropdown-content {
